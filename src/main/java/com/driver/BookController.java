@@ -15,49 +15,37 @@ public class BookController {
 
     // One example controller, make the rest by yourself
     @PostMapping("/create-book")
-    public ResponseEntity<Book> createBook(@RequestBody Book book){
+    public ResponseEntity createBook(@RequestBody Book book){
         Book newbook = bookService.createBook(book);
         return new ResponseEntity<>(newbook, HttpStatus.CREATED);
     }
-
     @GetMapping("/get-book-by-id/{id}")
-    public ResponseEntity<Book> getBokById(@PathVariable("id") String bookId){
-        Book book = bookService.findBookById(bookId);
-        if(book == null) throw new RuntimeException("Book Not Found");
-        return new ResponseEntity<>(book, HttpStatus.FOUND);
-    }
-
-    @GetMapping("/get-all-books")
-    public ResponseEntity<List<Book>> getAllBooks(){
-        List<Book> books = bookService.findAllBooks();
-        return new ResponseEntity<>(books, HttpStatus.FOUND);
-    }
-
-    @GetMapping("/books/get-books-by-author")
-    public ResponseEntity<List<Book>> getBooksByAuthor(@RequestParam("author") String author){
-        List<Book> authorBooks = bookService.findBooksByAuthor(author);
-        if(authorBooks == null) throw new RuntimeException("Author Not Found");
-
-        return new ResponseEntity<>(authorBooks, HttpStatus.FOUND);
-    }
-
-    @GetMapping("/get-books-by-genre")
-    public ResponseEntity<List<Book>> getBooksByGenre(@RequestParam("genre") String genre){
-        List<Book> books = bookService.findBooksByGenre(genre);
-        if(books == null) throw new RuntimeException("Genre Not Found");
-
-        return new ResponseEntity<>(books, HttpStatus.FOUND);
+    public Book findBookById(@PathVariable("id")String id){
+        return bookService.findBookById(id);
     }
 
     @DeleteMapping("/delete-book-by-id/{id}")
-    public ResponseEntity<String> deleteBookById(@PathVariable("id") String id){
-        bookService.deleteBookById(id);
-        return new ResponseEntity<>("Book deleted", HttpStatus.OK);
+    public String deleteBookById(@PathVariable("id") String id){
+        return bookService.deleteBookById(id);
     }
 
-    @DeleteMapping("/delete-all-books")
-    public ResponseEntity<String> deleteAllBooks(){
-        bookService.deleteAllBooks();
-        return new ResponseEntity<>("All Books are deleted", HttpStatus.OK);
+    @GetMapping("/get-all-books")
+    public List<Book> getAllBooks(){
+        return bookService.findAllBooks();
+
+    }
+
+    @GetMapping("/get-books-by-author/{name}")
+    public List<Book> getBookByAuthor(@PathVariable("name") String authorName){
+        return bookService.findBooksByAuthor(authorName);
+
+    }
+    @GetMapping("get-books-by-genre/{genre}")
+    public List<Book> getBookByGenre(@PathVariable("genre") String genreName){
+        return bookService.findBooksByGenre(genreName);
+    }
+    @DeleteMapping("delete-all-books")
+    public String deleteAllBooks(){
+        return bookService.deleteAllBooks();
     }
 }

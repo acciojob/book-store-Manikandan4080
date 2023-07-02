@@ -1,16 +1,17 @@
 package com.driver;
 
 public class Book {
-    
+
      private int id;
 
      private String name;
 
      private String genre;
-     
+
      private String author;
 
      public Book(){
+
      }
 
      public Book(int id, String name, String genre, String author) {
@@ -20,12 +21,12 @@ public class Book {
           this.author = author;
      }
 
-     public int getId() {
-          return id;
+     public String getAuthor() {
+          return author;
      }
 
-     public void setId(int id) {
-          this.id = id;
+     public void setAuthor(String author) {
+          this.author = author;
      }
 
      public String getName() {
@@ -44,11 +45,11 @@ public class Book {
           this.genre = genre;
      }
 
-     public String getAuthor() {
-          return author;
+     public int getId() {
+          return id;
      }
 
-     public void setAuthor(String author) {
-          this.author = author;
+     public void setId(int id) {
+          this.id = id;
      }
 }
